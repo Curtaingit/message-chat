@@ -35,5 +35,5 @@ public class Message extends BosEntity {
 
     @SchemaDocumentation("信息接收人列表")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent", orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Receiver> receivers = new HashSet<>();
+    private Set<Receiver> receivers;
 }

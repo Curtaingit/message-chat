@@ -1,14 +1,19 @@
 package com.curtain.messagechat.service.impl;
 
 import com.curtain.messagechat.domain.Message;
+import com.curtain.messagechat.domain.Receiver;
 import com.curtain.messagechat.domain.User;
+import com.curtain.messagechat.enums.ResultExceptionEnum;
+import com.curtain.messagechat.exception.MessageChatException;
 import com.curtain.messagechat.repository.MessageRepository;
 import com.curtain.messagechat.service.MessageService;
 import com.curtain.messagechat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Curtain
@@ -25,6 +30,7 @@ public class MessageServiceImpl implements MessageService {
     private UserService userService;
 
     @Override
+    @PreAuthorize("authenticated")
     public Message sendMessage(Message message) {
         return messageRepository.save(message);
     }
@@ -33,13 +39,23 @@ public class MessageServiceImpl implements MessageService {
     public Message findOne(String id) {
         Optional<Message> message = messageRepository.findById(id);
         if (!message.isPresent()){
-            throw new RuntimeException("信息未找到");
+            throw new MessageChatException(ResultExceptionEnum.MESSAGE_NOT_EXIST);
         }
-        return null;
+        return message.get();
     }
 
     @Override
-    public void confirm(User user, Message message) {
-        message = messageRepository.findById(message.getId()).get();
+    @PreAuthorize("authenticated")
+    public Message confirm(User user, Message message) {
+        message = findOne(message.getId());
+        user = userService.findOne(user.getId());
+        Set<Receiver> receivers = message.getReceivers();
+        for (Receiver receiver :receivers){
+            if (receiver.getUser().getId().equals(user.getId())){
+                receiver.setReaded();
+                return messageRepository.save(message);
+            }
+        }
+        throw new MessageChatException(ResultExceptionEnum.MESSAGE_READER_FAIL);
     }
 }

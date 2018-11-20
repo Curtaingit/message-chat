@@ -1,5 +1,6 @@
 package com.curtain.messagechat.exception;
 
+import com.curtain.messagechat.enums.ResultExceptionEnum;
 import graphql.GraphQLException;
 import graphql.errors.BusinessException;
 
@@ -9,18 +10,15 @@ import graphql.errors.BusinessException;
  */
 public class MessageChatException extends BusinessException {
 
-
+    private ResultExceptionEnum resultExceptionEnum;
 
     @Override
     public int getStatus() {
         return super.getStatus();
     }
 
-    public MessageChatException(String message, int status) {
-        super(message, status);
-    }
-
-    public MessageChatException(String message) {
-        super(message);
+    public MessageChatException(ResultExceptionEnum resultExceptionEnum){
+        super(resultExceptionEnum.getMessage(),resultExceptionEnum.getCode());
+        this.resultExceptionEnum =resultExceptionEnum;
     }
 }

@@ -1,36 +1,36 @@
 package com.curtain.messagechat.domain;
 
+
 import cn.wzvtcsoft.bosdomain.Entry;
 import cn.wzvtcsoft.bosdomain.annotations.Bostype;
 import graphql.annotation.SchemaDocumentation;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
  * @author Curtain
- * @date 2018/11/19 10:27
+ * @date 2018/10/9 14:50
  */
+
+@Entity
+@SchemaDocumentation("权限集合")
+@Bostype("A08")
 @Getter
 @Setter
-@Entity
-@Bostype("R01")
-@SchemaDocumentation("信息接收人")
-public class Receiver extends Entry{
-
-    @SchemaDocumentation("用户")
-    @ManyToOne
-    private User user;
-
-    @SchemaDocumentation("是否已读")
-    private boolean readed = false;
-
+@ToString
+public class PrivilegeItem extends Entry {
     /**
-     * 设置为已读
+     * 权限
      */
-    public void setReaded(){
-        this.readed = true;
-    }
+    @ManyToOne
+    private Privilege privilege;
+    /**
+     * 约束规则
+     */
+    private String constraintRule;
+
 }

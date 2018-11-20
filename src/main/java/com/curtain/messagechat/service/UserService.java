@@ -15,4 +15,18 @@ public interface UserService extends UserDetailsService {
      * @return
      */
     User save(User user);
+
+    /**
+     * 修改
+     * @param user
+     * @return
+     */
+    User update(User user);
+
+    /**
+     * 通过id查询
+     * @param id
+     * @return
+     */
+    User findOne(String id);
 }

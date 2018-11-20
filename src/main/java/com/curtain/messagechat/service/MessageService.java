@@ -14,6 +14,7 @@ public interface MessageService {
      * @param message
      * @return
      */
+
     Message sendMessage(Message message);
 
     /**
@@ -21,7 +22,7 @@ public interface MessageService {
      * @param user
      * @param message
      */
-    void confirm(User user,Message message);
+    Message confirm(User user,Message message);
 
     /**
      * 通过id查询

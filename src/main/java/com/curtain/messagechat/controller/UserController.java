@@ -1,10 +1,14 @@
 package com.curtain.messagechat.controller;
 
+import cn.wzvtcsoft.validator.anntations.DomainRule;
+import cn.wzvtcsoft.validator.anntations.MutationValidated;
 import com.curtain.messagechat.domain.User;
 import com.curtain.messagechat.service.UserService;
 import graphql.annotation.GraphqlController;
+import graphql.annotation.GraphqlMutation;
 import graphql.annotation.SchemaDocumentation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,16 +20,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @GraphqlController("users")
 @RestController
+@MutationValidated
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @SchemaDocumentation("添加用户")
-    @PostMapping(path = "/register")
-    public User register(User user){
-        return user;
+    @GraphqlMutation(path = "/register")
+    public User register(@DomainRule(value = "phone && nickname && password") User user){
+        return userService.save(user);
     }
+
+    @SchemaDocumentation("修改用户")
+    @GraphqlMutation("/update")
+    public User update(User user){
+        return userService.update(user);
+    }
+
 
 
 }
