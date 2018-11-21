@@ -43,9 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.headers().frameOptions().sameOrigin();
-
-        AuthenticationManager am = this.authenticationManager();
+//        http.headers().frameOptions().sameOrigin();
 
         http.cors().and().
                 csrf().disable()

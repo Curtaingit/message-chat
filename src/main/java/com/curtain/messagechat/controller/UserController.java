@@ -8,17 +8,14 @@ import graphql.annotation.GraphqlController;
 import graphql.annotation.GraphqlMutation;
 import graphql.annotation.SchemaDocumentation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Curtain
  * @date 2018/11/19 14:20
  */
-@GraphqlController("users")
+@GraphqlController("user")
 @RestController
 @MutationValidated
 public class UserController {
