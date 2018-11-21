@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="css/history.css" />
 
     <!-- Note: this resource is not a file, it is bundled live by the test server -->
-    <script src="message/graphiql.js"></script>
+    <script src="./graphiql.js"></script>
   </head>
   <body>
     <div id="graphiql">Loading...</div>
@@ -106,7 +106,7 @@
 
       // Defines a GraphQL fetcher using the fetch API.
       function graphQLFetcher(graphQLParams,xtoken) {
-        return fetch('/graphql', {
+        return fetch('/message/graphql', {
           method: 'post',
           headers: {
             'Accept': 'application/json',
