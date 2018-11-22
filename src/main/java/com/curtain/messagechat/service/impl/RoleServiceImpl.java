@@ -29,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Override
-    @PreAuthorize("hasRole('C1')")
+    @PreAuthorize("hasAuthority('C1')")
     public Role save(Role role) {
 
         //todo 需要校验constraint 是否符合规则 能否转化成qfilter  失败则抛出异常
@@ -41,7 +41,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @PreAuthorize("hasRole('C1')")
+    @PreAuthorize("hasAuthority('C1')")
     public Role update(Role role) {
         //todo 需要校验constraint 是否符合规则 能否转化成qfilter  失败则抛出异常
         role = roleRepository.save(role);
