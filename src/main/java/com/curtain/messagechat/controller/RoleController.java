@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @MutationValidated
 //@PrivilegeConstraint(expression = "k=user.id,v=#p.id,o=equal && k=user.name,o=ISNOTNULL")
-class RoleController {
+public class RoleController {
 
     @Autowired
     private RoleService roleService;
