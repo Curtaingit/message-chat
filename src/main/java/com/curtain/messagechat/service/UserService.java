@@ -10,11 +10,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService {
 
     /**
-     * 保存
+     * 普管理员添加用户
      * @param user
      * @return
      */
     User save(User user);
+
+    /**
+     * 普通用户注册
+     *
+     * @param user
+     * @return
+     */
+    User register(User user);
 
     /**
      * 修改

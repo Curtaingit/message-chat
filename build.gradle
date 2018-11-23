@@ -59,3 +59,11 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.springframework.security:spring-security-test')
 }
+
+//添加远程调试运行端口 5005
+bootRun{
+	classpath = sourceSets.test.runtimeClasspath
+	jvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n"]
+	args '--debug'
+
+}

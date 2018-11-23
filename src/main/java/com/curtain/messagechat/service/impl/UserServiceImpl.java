@@ -66,12 +66,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        //todo 应该只保存  用户注册时应该 处理的数据
+    public User register(User user) {
         Optional<User> result = userRepository.findByPhone(user.getPhone());
         if (result.isPresent()) {
             throw new MessageChatException(ResultExceptionEnum.USER_PHONE_IS_BIND);
         }
+        User rs =new User();
+        user.setPhone(user.getPhone());
+        user.setNickname(user.getNickname());
+        user.setPassword(user.getPassword());
+        return userRepository.save(rs);
+    }
+
+    @Override
+    @PreAuthorize("hasAuthority('B1')")
+    public User save(User user) {
+        //todo 应该只保存  用户注册时应该 处理的数据
+        //todo  管理员添加用户另外一个接口
+        Optional<User> result = userRepository.findByPhone(user.getPhone());
+        if (result.isPresent()) {
+            throw new MessageChatException(ResultExceptionEnum.USER_PHONE_IS_BIND);
+        }
+        privilegeCheck(user);
         return userRepository.save(user);
     }
 

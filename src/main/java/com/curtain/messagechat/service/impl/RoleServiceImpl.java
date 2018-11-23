@@ -4,6 +4,8 @@ import com.curtain.messagechat.domain.Privilege;
 import com.curtain.messagechat.domain.PrivilegeItem;
 import com.curtain.messagechat.domain.Role;
 import com.curtain.messagechat.domain.User;
+import com.curtain.messagechat.enums.ResultExceptionEnum;
+import com.curtain.messagechat.exception.MessageChatException;
 import com.curtain.messagechat.repository.RoleRepository;
 import com.curtain.messagechat.service.RoleService;
 
@@ -15,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,6 +36,11 @@ public class RoleServiceImpl implements RoleService {
     public Role save(Role role) {
 
         //todo 需要校验constraint 是否符合规则 能否转化成qfilter  失败则抛出异常
+        //校验角色名是否已经存在
+        Optional<Role> result = roleRepository.findByName(role.getName());
+        if (result.isPresent()){
+            throw new MessageChatException(ResultExceptionEnum.ROLE_NAME_IS_EXIST);
+        }
 
         role = roleRepository.save(role);
         privilegeCheck(role);

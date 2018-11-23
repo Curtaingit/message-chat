@@ -14,7 +14,8 @@ public enum ResultExceptionEnum {
     MESSAGE_READER_FAIL(10002,"设置消息已读失败"),
 
     USER_NOT_EXIST(20001,"用户不存在"),
-    USER_PHONE_IS_BIND(20002,"此手机号已经被账号绑定")
+    USER_PHONE_IS_BIND(20002,"此手机号已经被账号绑定"),
+    ROLE_NAME_IS_EXIST(21001,"角色名已经存在")
 
     ;
 

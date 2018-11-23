@@ -24,9 +24,15 @@ public class UserController {
     private UserService userService;
 
     @SchemaDocumentation("添加用户")
+    @GraphqlMutation(path = "/add")
+    public User add(@DomainRule(value = "phone && nickname && password") User user){
+        return userService.save(user);
+    }
+
+    @SchemaDocumentation("用户注册")
     @GraphqlMutation(path = "/register")
     public User register(@DomainRule(value = "phone && nickname && password") User user){
-        return userService.save(user);
+        return userService.register(user);
     }
 
     @SchemaDocumentation("修改用户")
