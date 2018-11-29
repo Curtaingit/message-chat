@@ -50,6 +50,13 @@ dependencies {
 	compile('cn.wzvtcsoft.embracex:graphql-jpa:0.1-SNAPSHOT')
 	compile('mysql:mysql-connector-java')
 
+
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('de.codecentric:spring-boot-admin-starter-client:2.0.0')
+	compile('org.jolokia:jolokia-core')
+//	compile('de.codecentric:spring-boot-admin-server:2.0.4')
+//	compile('de.codecentric:spring-boot-admin-server-ui:2.0.4')
+
 	annotationProcessor 'org.projectlombok:lombok:1.18.2'
 	compileOnly 'org.projectlombok:lombok:1.18.2'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
