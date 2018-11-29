@@ -13,7 +13,9 @@ spring:
   boot:
     admin:
       client:
-        url: "http://115.159.154.194:8080"
+        url: "http://localhost:8080"
+        username: curtain
+        password: 123456
   application:
     name: message-chat
 
