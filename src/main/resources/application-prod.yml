@@ -8,9 +8,32 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
     show-sql: true
 
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8080"
+  application:
+    name: message-chat
 
 server:
   port: 8088
+
+info:
+  date: 2018/11/27 14:20
+  author: Curtain
+
+# 日志文件
+logging:
+  file: ./target/admin-server.log
+
+#加载所有端点  默认只加载info、health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
